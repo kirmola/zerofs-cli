@@ -38,7 +38,7 @@ You can also download it from settings page under your account on our site.
 
 **Option 2:** Pass token directly:
 ```bash
-python uploader.py upload myfile.zip \
+python zerofs.py upload myfile.zip \
   --bucket-code eu \
   --api-url https://zerofs.link/api/ \
   --token YOUR_TOKEN
@@ -47,7 +47,7 @@ python uploader.py upload myfile.zip \
 ## Optional: Add a Note
 
 ```bash
-python uploader.py upload myfile.zip \
+python zerofs.py upload myfile.zip \
   --bucket-code eu \
   --api-url https://zerofs.link/api/ \
   --note "some zip which is worth sharing at zerofs"
