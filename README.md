@@ -6,7 +6,7 @@ Upload files to ZeroFS from the command line.
 
 1. **Download the script:**
    ```bash
-   wget [https://raw.githubusercontent.com/kirmola/zerofs-cli/main/zerofs.py](https://raw.githubusercontent.com/kirmola/zerofs-cli/main/zerofs.py)
+   wget 'https://raw.githubusercontent.com/kirmola/zerofs-cli/main/zerofs.py'
    ```
 
 2. **Create virtual environment (optional but recommended):**
@@ -23,7 +23,7 @@ Upload files to ZeroFS from the command line.
 ## Upload a File
 
 ```bash
-python uploader.py upload myfile.zip \
+python zerofs.py upload myfile.zip \
   --bucket-code eu \
   --api-url https://zerofs.link/api/
 ```
@@ -34,6 +34,7 @@ python uploader.py upload myfile.zip \
 ```json
 {"token": "YOUR_TOKEN"}
 ```
+You can also download it from settings page under your account on our site.
 
 **Option 2:** Pass token directly:
 ```bash
@@ -49,7 +50,7 @@ python uploader.py upload myfile.zip \
 python uploader.py upload myfile.zip \
   --bucket-code eu \
   --api-url https://zerofs.link/api/ \
-  --note "some zip which isnt good for local"
+  --note "some zip which is worth sharing at zerofs"
 ```
 
 That's it.
