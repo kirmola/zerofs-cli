@@ -180,21 +180,21 @@ class APIClient:
 
 
 class Uploader:
-    """Handles file uploads directly to S3/B2 using presigned URLs."""
+    """Handles file uploads directly to storage using presigned URLs."""
 
     def __init__(self, api_client: APIClient):
         self.api_client = api_client
         self.session = self._create_session()
 
     def _create_session(self):
-        """Create requests session for S3/B2 uploads."""
+        """Create requests session for storage uploads."""
         session = requests.Session()
         return session
 
     def upload_file(self, file_path: str, upload_metadata: Dict[str, Any],
                     token: Optional[str] = None) -> bool:
         """
-        Upload file directly to S3/B2 using presigned URLs.
+        Upload file directly to storage using presigned URLs.
         Automatically handles single or multipart upload based on metadata.
         """
         upload_type = upload_metadata.get('upload_type')
@@ -208,7 +208,7 @@ class Uploader:
 
     def _single_upload(self, file_path: str, metadata: Dict[str, Any],
                        token: Optional[str] = None) -> bool:
-        """Perform single file upload directly to S3/B2."""
+        """Perform single file upload directly to storage."""
         print(f'Starting single upload for {os.path.basename(file_path)}...')
         file_size = os.path.getsize(file_path)
         progress = ProgressTracker(file_size)
@@ -248,7 +248,7 @@ class Uploader:
 
     def _multipart_upload(self, file_path: str, metadata: Dict[str, Any],
                           token: Optional[str] = None) -> bool:
-        """Perform multipart upload directly to S3/B2 using presigned URLs."""
+        """Perform multipart upload directly to storage using presigned URLs."""
         file_size = os.path.getsize(file_path)
         chunk_size = metadata['chunk_size']
         part_urls = metadata['part_urls']
@@ -305,7 +305,7 @@ class Uploader:
             parts.sort(key=lambda x: x['part_number'])
 
             progress.complete()
-            print('All parts uploaded to S3/B2 successfully!')
+            print('All parts uploaded to storage successfully!')
 
             print('Finalizing multipart upload with API server...')
             result = self.api_client.complete_multipart_upload(
@@ -379,7 +379,7 @@ class Uploader:
 def main():
     """Main entry point for CLI."""
     parser = argparse.ArgumentParser(
-        description='Upload files to S3/B2 via API server (SSE-C encryption managed server-side)',
+        description='Upload files to storage via API server (SSE-C encryption managed server-side)',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''
 Examples:
@@ -428,7 +428,7 @@ Examples:
 
         print(f'File: {filename}')
         print(f'Size: {file_size / (1024**2):.2f} MB')
-        print(f'Bucket: {args.bucket_code}')
+        print(f'Region Code: {args.bucket_code}')
         print(f'API Server: {args.api_url}')
         print()
 
@@ -459,7 +459,6 @@ Examples:
             return 1
 
         print(f'Upload type: {metadata.get("upload_type")}')
-        print(f'S3 key: {metadata.get("s3_key")}')
         print()
 
         uploader = Uploader(api_client)
