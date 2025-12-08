@@ -479,7 +479,7 @@ Examples:
 
         file_id = metadata.get('file_id')
         if file_id:
-            print(f'File ID: {main_domain}/{file_id}/')
+            print(f'File ID: {main_domain}/f/{file_id}/')
 
         download_url = metadata.get('download_url')
         if download_url:
