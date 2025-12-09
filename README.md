@@ -1,6 +1,7 @@
-# ZeroFS Uploader
+# [ZeroFS Uploader on GitHub](https://github.com/kirmola/zerofs-cli)
 
 Upload files to ZeroFS from the command line.
+
 
 ## Setup
 
